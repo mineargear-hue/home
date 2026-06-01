@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Minear Project</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+
+body{
+  min-height:100vh;
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+  padding-bottom:60px;
+}
+
+.bg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background:linear-gradient(135deg,#1a1a6e,#b21f1f,#1a6e3a,#6e1a6a,#1a5c8e,#8e6e1a);
+  background-size:400% 400%;
+  animation:gradientShift 12s ease infinite;
+}
+.bg::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.35);
+}
+@keyframes gradientShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+.content{
+  position:relative;
+  z-index:1;
+  max-width:600px;
+  margin:0 auto;
+  padding:0 16px;
+}
+
+.header{
+  padding:28px 0 0;
+  margin-bottom:32px;
+}
+.logo-row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+}
+.logo-mark{
+  width:44px;height:44px;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.logo-mark svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.logo-text{font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:#fff;letter-spacing:0.5px;line-height:1.2;}
+.logo-sub{font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:1px;text-transform:uppercase;font-weight:400;}
+.hero-sub{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.5;}
+
+.section-label{
+  font-family:'DM Mono',monospace;
+  font-size:10px;font-weight:500;
+  color:rgba(255,255,255,0.5);
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:12px;padding-bottom:8px;
+  border-bottom:1px solid rgba(255,255,255,0.15);
+}
+
+.apps-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:32px;}
+
+.app-card{
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,0.2);
+  border-radius:16px;
+  overflow:hidden;
+  text-decoration:none;
+  display:block;
+  transition:transform 0.15s,background 0.2s,border-color 0.2s;
+  animation:fadeUp 0.4s ease both;
+}
+.app-card:nth-child(1){animation-delay:0.05s;}
+.app-card:nth-child(2){animation-delay:0.12s;}
+.app-card:nth-child(3){animation-delay:0.19s;}
+.app-card:nth-child(4){animation-delay:0.26s;}
+.app-card:active{transform:scale(0.97);}
+.app-card:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.35);}
+.app-card.coming-soon{opacity:0.45;pointer-events:none;}
+
+.app-card-inner{padding:18px;display:flex;gap:14px;align-items:flex-start;}
+.app-icon{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);}
+.app-body{flex:1;min-width:0;}
+.app-name{font-size:17px;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.2;}
+.app-desc{font-size:13px;color:rgba(255,255,255,0.7);line-height:1.45;margin-bottom:10px;}
+.app-meta{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+.app-tag{font-family:'DM Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.5px;padding:3px 8px;border-radius:5px;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.85);border:1px solid rgba(255,255,255,0.2);display:inline-flex;align-items:center;gap:5px;}
+.app-tag.live{background:rgba(34,197,94,0.2);color:#86efac;border-color:rgba(34,197,94,0.3);}
+.app-arrow{font-size:18px;color:rgba(255,255,255,0.4);flex-shrink:0;margin-top:2px;transition:transform 0.15s,color 0.15s;}
+.app-card:hover .app-arrow{transform:translateX(4px);color:#fff;}
+
+.live-dot{width:6px;height:6px;border-radius:50%;background:#22C55E;display:inline-block;box-shadow:0 0 0 2px rgba(34,197,94,0.3);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 2px rgba(34,197,94,0.3);}50%{box-shadow:0 0 0 5px rgba(34,197,94,0.08);}}
+
+.footer{padding:16px 0;display:flex;align-items:center;justify-content:space-between;}
+.footer-text{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);letter-spacing:0.5px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+/* ── PIN SCREEN ── */
+.pin-screen{
+  position:fixed;inset:0;z-index:100;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+}
+.pin-box{
+  background:rgba(255,255,255,0.12);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:24px;
+  padding:36px 28px;
+  width:100%;max-width:320px;text-align:center;
+}
+.pin-logo{width:52px;height:52px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;}
+.pin-logo svg{width:26px;height:26px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.pin-title{font-size:20px;font-weight:700;color:#fff;margin-bottom:4px;}
+.pin-sub{font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:28px;}
+.pin-dots{display:flex;justify-content:center;gap:14px;margin-bottom:28px;}
+.pin-dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,0.4);background:transparent;transition:background 0.15s,border-color 0.15s;}
+.pin-dot.filled{background:#fff;border-color:#fff;}
+.pin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.pin-btn{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.18);border-radius:14px;color:#fff;font-family:'DM Sans',sans-serif;font-size:22px;font-weight:500;height:62px;cursor:pointer;transition:background 0.1s,transform 0.1s;-webkit-tap-highlight-color:transparent;}
+.pin-btn:active{background:rgba(255,255,255,0.25);transform:scale(0.94);}
+.pin-btn.clear{font-size:14px;color:rgba(255,255,255,0.6);}
+.pin-btn.empty{background:transparent;border-color:transparent;pointer-events:none;}
+.pin-error{font-size:13px;color:#f87171;margin-top:14px;min-height:20px;font-weight:500;}
+.hidden{display:none !important;}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<!-- PIN SCREEN -->
+<div class="pin-screen" id="pinScreen">
+  <div class="pin-box">
+    <div class="pin-logo">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </div>
+    <div class="pin-title">Minear Project</div>
+    <div class="pin-sub">Enter PIN to continue</div>
+    <div class="pin-dots">
+      <div class="pin-dot" id="d0"></div>
+      <div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div>
+      <div class="pin-dot" id="d3"></div>
+    </div>
+    <div class="pin-grid">
+      <button class="pin-btn" onclick="addDigit('1')">1</button>
+      <button class="pin-btn" onclick="addDigit('2')">2</button>
+      <button class="pin-btn" onclick="addDigit('3')">3</button>
+      <button class="pin-btn" onclick="addDigit('4')">4</button>
+      <button class="pin-btn" onclick="addDigit('5')">5</button>
+      <button class="pin-btn" onclick="addDigit('6')">6</button>
+      <button class="pin-btn" onclick="addDigit('7')">7</button>
+      <button class="pin-btn" onclick="addDigit('8')">8</button>
+      <button class="pin-btn" onclick="addDigit('9')">9</button>
+      <button class="pin-btn empty"></button>
+      <button class="pin-btn" onclick="addDigit('0')">0</button>
+      <button class="pin-btn clear" onclick="clearDigit()">⌫</button>
+    </div>
+    <div class="pin-error" id="pinError"></div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT (hidden until PIN entered) -->
+<div class="content hidden" id="mainContent">
+
+  <div class="header">
+    <div class="logo-row">
+      <div class="logo-mark">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div>
+        <div class="logo-text">minearproject.com</div>
+        
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="section-label">Live Apps</div>
+  <div class="apps-grid">
+
+    <a class="app-card" href="https://ot.minearproject.com" target="_blank">
+      <div class="app-card-inner">
+        <div class="app-icon">⏱️</div>
+        <div class="app-body">
+          <div class="app-name">OT Tracker</div>
+          <div class="app-desc">Overtime logging for FM&amp;O staff across all facilities.</div>
+          <div class="app-meta">
+            <span class="app-tag live"><span class="live-dot"></span> Live</span>
+            <span class="app-tag">PIN Protected</span>
+            <span class="app-tag">466 Entries</span>
+          </div>
+        </div>
+        <div class="app-arrow">→</div>
+      </div>
+    </a>
+
+    <a class="app-card" href="https://trades.minearproject.com" target="_blank">
+      <div class="app-card-inner">
+        <div class="app-icon">🔧</div>
+        <div class="app-body">
+          <div class="app-name">Trade School</div>
+          <div class="app-desc">Training platform for Plumbing, Auto, Electrical, Niagara &amp; Carpentry.</div>
+          <div class="app-meta">
+            <span class="app-tag live"><span class="live-dot"></span> Live</span>
+            <span class="app-tag">5 Trades</span>
+            <span class="app-tag">Lessons + Quizzes</span>
+          </div>
+        </div>
+        <div class="app-arrow">→</div>
+      </div>
+    </a>
+
+  </div>
+
+  <div class="section-label">Coming Soon</div>
+  <div class="apps-grid">
+
+    <div class="app-card coming-soon">
+      <div class="app-card-inner">
+        <div class="app-icon">📋</div>
+        <div class="app-body">
+          <div class="app-name">Work Order Tracker</div>
+          <div class="app-desc">Log and track maintenance work orders by facility and crew.</div>
+          <div class="app-meta"><span class="app-tag">Coming Soon</span></div>
+        </div>
+        <div class="app-arrow">→</div>
+      </div>
+    </div>
+
+    <div class="app-card coming-soon">
+      <div class="app-card-inner">
+        <div class="app-icon">📊</div>
+        <div class="app-body">
+          <div class="app-name">Crew Dashboard</div>
+          <div class="app-desc">At-a-glance view of team assignments and facility status.</div>
+          <div class="app-meta"><span class="app-tag">Coming Soon</span></div>
+        </div>
+        <div class="app-arrow">→</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">minearproject.com</div>
+  </div>
+
+</div>
+
+<script>
+const CORRECT = '1478';
+let entered = '';
+
+function addDigit(d) {
+  if (entered.length >= 4) return;
+  entered += d;
+  updateDots();
+  if (entered.length === 4) checkPin();
+}
+
+function clearDigit() {
+  entered = entered.slice(0, -1);
+  updateDots();
+  document.getElementById('pinError').textContent = '';
+}
+
+function updateDots() {
+  for (let i = 0; i < 4; i++) {
+    document.getElementById('d' + i).classList.toggle('filled', i < entered.length);
+  }
+}
+
+function checkPin() {
+  if (entered === CORRECT) {
+    document.getElementById('pinScreen').classList.add('hidden');
+    document.getElementById('mainContent').classList.remove('hidden');
+    sessionStorage.setItem('mp_auth', '1');
+  } else {
+    document.getElementById('pinError').textContent = 'Incorrect PIN. Try again.';
+    entered = '';
+    updateDots();
+  }
+}
+
+// Stay unlocked within the session
+if (sessionStorage.getItem('mp_auth') === '1') {
+  document.getElementById('pinScreen').classList.add('hidden');
+  document.getElementById('mainContent').classList.remove('hidden');
+}
+</script>
+</body>
+</html>
